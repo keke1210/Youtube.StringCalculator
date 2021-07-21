@@ -16,11 +16,9 @@ namespace StringCalculator
                 var customDelimiters = splitOnFirstNewLine[0].Replace("//", string.Empty);
 
                 var delimetersMap = new Dictionary<char, int>();
-
                 for (int i = 0; i < customDelimiters.Length; i++)
                 {
                     char c = customDelimiters[i];
-
                     if (delimetersMap.ContainsKey(c))
                     {
                         delimetersMap[c]++;

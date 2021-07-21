@@ -142,5 +142,35 @@ namespace StringCalculator.Tests
             // Assert
             result.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("//***%%**\n1***2%%3**2", 8)]
+        [InlineData("//##$#\n1##25$3", 29)]
+        public void Add_AddsNumbersUsingMultipleDelimitersOfAnyLengthRepeatingWithSameCharacterButDifferentLength_WhenStringIsValid(string calculation, int expected)
+        {
+            // Arrange
+            var sut = new Calculator();
+
+            // Act
+            var result = sut.Add(calculation);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("//***%%**\n1*****2%%3", 6)]
+        [InlineData("//##$#\n1###25$3", 29)]
+        public void Add_AddsNumbersUsingMultipleDelimitersOfAnyLengthRepeatingWithSameCharacterButDifferentLength_WhenStringIsNotValid(string calculation, int expected)
+        {
+            // Arrange
+            var sut = new Calculator();
+
+            // Act
+            var result = sut.Add(calculation);
+
+            // Assert
+            result.Should().NotBe(expected);
+        }
     }
 }
