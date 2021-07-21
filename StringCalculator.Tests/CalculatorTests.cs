@@ -112,5 +112,20 @@ namespace StringCalculator.Tests
             // Assert
             result.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("//*%\n1*2%3", 6)]
+        [InlineData("//#$\n1#25$3", 29)]
+        public void Add_AddsNumbersUsingMultipleDelimitersOfAnyLength_WhenStringIsValid(string calculation, int expected)
+        {
+            // Arrange
+            var sut = new Calculator();
+
+            // Act
+            var result = sut.Add(calculation);
+
+            // Assert
+            result.Should().Be(expected);
+        }
     }
 }
