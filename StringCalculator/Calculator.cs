@@ -8,12 +8,12 @@ namespace StringCalculator
     {
         public int Add(string numbers)
         {
-            var delimiters = new List<char>{',', '\n'};
+            var delimiters = new List<string>{",", "\n"};
 
             if (numbers.StartsWith("//"))
             {
                 var splitOnFirstNewLine = numbers.Split(new[] {'\n'}, 2);
-                var customDelimiter = splitOnFirstNewLine[0].Replace("//", string.Empty).Single();
+                var customDelimiter = splitOnFirstNewLine[0].Replace("//", string.Empty);
                 delimiters.Add(customDelimiter);
                 numbers = splitOnFirstNewLine[1];
             }
