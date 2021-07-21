@@ -46,5 +46,6 @@ if there are multiple negatives, show all of them in the exception message.
 9 make sure you can also handle multiple delimiters with length longer than one char
 ———————————————————————————————— 
 
-10 Handle multiple delimiters with length longer than one char, when it occurs more than one time but with different lengths for example.
+10 Handle multiple delimiters with length longer than one char, when it occurs more than one time but with different lengths 
+for example: “//[**][%][*]\n1*2%3”. This should not allow for “//[**][%][*]\n1***2%3” to be correct.
 ———————————————————————————————— 

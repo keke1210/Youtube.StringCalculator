@@ -13,24 +13,10 @@ namespace StringCalculator
             if (numbers.StartsWith("//"))
             {
                 var splitOnFirstNewLine = numbers.Split(new[] { '\n' }, 2);
-                var customDelimiters = splitOnFirstNewLine[0].Replace("//", string.Empty);
 
-                var delimetersMap = new Dictionary<char, int>();
-                for (int i = 0; i < customDelimiters.Length; i++)
-                {
-                    char c = customDelimiters[i];
-                    if (delimetersMap.ContainsKey(c))
-                    {
-                        delimetersMap[c]++;
-                    }
-                    else
-                    {
-                        delimetersMap.Add(c, 1);
-                    }
-                }
-
-                var collectionOfDelimeters = delimetersMap.Select(x => new string(x.Key, x.Value));
+                var collectionOfDelimeters = GetDelimeters(splitOnFirstNewLine[0]);
                 delimiters.AddRange(collectionOfDelimeters);
+
                 numbers = splitOnFirstNewLine[1];
             }
 
@@ -48,6 +34,35 @@ namespace StringCalculator
             }
 
             return splitNumbers.Sum();
+        }
+
+        private static IEnumerable<string> GetDelimeters(string leftSplitOnFirstNewLine)
+        {
+            var delimetersPattern = leftSplitOnFirstNewLine.Replace("//", string.Empty);
+
+            var delimetersResult = new List<string>();
+
+            int stringCounter = 1;
+            for (int i = 0; i < delimetersPattern.Length; i++)
+            {
+                char curr = delimetersPattern[i];
+                char next = i != delimetersPattern.Length - 1 
+                    ? delimetersPattern[i + 1]
+                    : Convert.ToChar(Convert.ToInt32(delimetersPattern.Last()) + 27);
+
+                if (curr != next)
+                {
+                    delimetersResult.Add(new string(curr, stringCounter));
+                    
+                    stringCounter = 1;
+                }
+                else
+                {
+                    stringCounter++;
+                }
+            }
+
+            return delimetersResult;
         }
     }
 }
