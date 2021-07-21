@@ -116,7 +116,7 @@ namespace StringCalculator.Tests
         [Theory]
         [InlineData("//*%\n1*2%3", 6)]
         [InlineData("//#$\n1#25$3", 29)]
-        public void Add_AddsNumbersUsingMultipleDelimitersOfAnyLength_WhenStringIsValid(string calculation, int expected)
+        public void Add_AddsNumbersUsingMultipleDelimitersOf1CharacterLength_WhenStringIsValid(string calculation, int expected)
         {
             // Arrange
             var sut = new Calculator();
